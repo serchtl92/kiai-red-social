@@ -12,22 +12,35 @@ body {
   background-color: #fff;
 }
 
+/* Barra superior con íconos */
 .profile-header-icons {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  padding: 0 1rem;
+  align-items: center;
+  gap: 20px;
+  padding: 1rem 1rem 0 1rem;
+  font-size: 1.4rem;
 }
 
+.profile-header-icons img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+
+/* Imagen de perfil sin recorte */
 .profile-avatar {
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
   margin: 0 auto;
   margin-bottom: 0.8rem;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
+
 
 .profile-name {
   font-size: 1.6rem;
