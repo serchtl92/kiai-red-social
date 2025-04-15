@@ -5,10 +5,10 @@ import './ProfilePage.css';
 const ProfilePage = () => {
   const [nombre, setNombre] = useState('sergio');
   const [rol, setRol] = useState('estudiante');
-  const [fotoPerfil, setFotoPerfil] = useState('/avatar.png');
+  const [fotoPerfil, setFotoPerfil] = useState('/default-avatar.png');
 
   useEffect(() => {
-    // Aquí puedes cargar datos reales desde Supabase si lo deseas
+    // Aquí puedes conectar con Supabase si lo deseas
   }, []);
 
   return (
@@ -26,9 +26,9 @@ const ProfilePage = () => {
       <button className="add-friend-btn">Añadir amigo</button>
 
       <div className="insignias">
-        <img src="/insignia1.png" alt="Insignia 1" />
-        <img src="/insignia2.png" alt="Insignia 2" />
-        <img src="/insignia3.png" alt="Insignia 3" />
+        <img src="/icons/insignia1.png" alt="Insignia 1" />
+        <img src="/icons/insignia2.png" alt="Insignia 2" />
+        <img src="/icons/insignia3.png" alt="Insignia 3" />
       </div>
 
       <div className="publicacion">
