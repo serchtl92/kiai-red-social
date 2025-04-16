@@ -8,6 +8,9 @@ const ProfilePage = () => {
   const [rol, setRol] = useState('');
   const [loading, setLoading] = useState(true);
   const [mostrarMenu, setMostrarMenu] = useState(false);
+  const [amigos, setAmigos] = useState(0);
+  const [dojoNombre, setDojoNombre] = useState('');
+  const [orgNombre, setOrgNombre] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +22,7 @@ const ProfilePage = () => {
         return;
       }
 
+      // Buscar en senseis
       const { data: sensei } = await supabase
         .from('senseis')
         .select('*')
@@ -28,10 +32,12 @@ const ProfilePage = () => {
       if (sensei) {
         setPerfil(sensei);
         setRol(sensei.rol);
+        await fetchRelaciones(sensei.id, sensei.rol, sensei.dojo_id, sensei.organizacion_id);
         setLoading(false);
         return;
       }
 
+      // Buscar en estudiantes
       const { data: estudiante } = await supabase
         .from('estudiantes')
         .select('*')
@@ -41,9 +47,46 @@ const ProfilePage = () => {
       if (estudiante) {
         setPerfil(estudiante);
         setRol(estudiante.rol);
+        await fetchRelaciones(estudiante.id, estudiante.rol, estudiante.dojo_id, estudiante.organizacion_id);
       }
 
       setLoading(false);
+    };
+
+    const fetchRelaciones = async (id, tipo, dojo_id, organizacion_id) => {
+      // Amigos confirmados
+      const { count } = await supabase
+        .from('amigos')
+        .select('*', { count: 'exact', head: true })
+        .or(`usuario_id.eq.${id},amigo_id.eq.${id}`)
+        .eq('estado', 'aceptado');
+
+      setAmigos(count || 0);
+
+      // Dojo
+      if (dojo_id) {
+        console.log('Dojo ID recibido:', dojo_id);
+        const { data: dojo, error } = await supabase
+          .from('dojos')
+          .select('nombre')
+          .eq('id', dojo_id)
+          .single();
+      
+        if (error) console.error('Error al obtener dojo:', error.message);
+        console.log('Nombre dojo:', dojo?.nombre);
+      
+        setDojoNombre(dojo?.nombre || '');
+      }
+      
+      // Organización
+      if (organizacion_id) {
+        const { data: org } = await supabase
+          .from('organizaciones')
+          .select('nombre')
+          .eq('id', organizacion_id)
+          .single();
+        setOrgNombre(org?.nombre || '');
+      }
     };
 
     fetchPerfil();
@@ -51,56 +94,65 @@ const ProfilePage = () => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate('/login');
+    navigate('/');
   };
 
   if (loading || !perfil) return <div className="loading">Cargando perfil...</div>;
 
   return (
     <div className="profile-mobile">
-
-      {/* Barra superior con íconos */}
+      {/* Barra superior */}
       <div className="top-bar">
         <span>👤</span>
         <span>🔔</span>
         <span onClick={() => setMostrarMenu(!mostrarMenu)}>☰</span>
       </div>
 
-      {/* Menú desplegable */}
+      {/* Menú */}
       {mostrarMenu && (
         <div className="menu-dropdown">
           <button onClick={handleLogout}>Cerrar sesión</button>
         </div>
       )}
 
-      <div className="profile-header">
-        <img
-          src={perfil.foto_perfil || '/default-avatar.png'}
-          alt="Foto de perfil"
-          className="profile-img"
-        />
-        <h2 className="profile-nombre">{perfil.nombre}</h2>
-        <p className="profile-rol">{rol.toUpperCase()}</p>
+      {/* Foto de perfil */}
+      <img
+        src={perfil.foto_perfil || '/default-avatar.png'}
+        alt="Avatar"
+        className="profile-avatar"
+      />
 
-        <div className="profile-stats">
-          <div><strong>104</strong><br />amigos</div>
-          <div><strong>Rango 5to</strong><br />dan</div>
-          <div><strong>{perfil.insignias?.length || 12}</strong><br />insignias</div>
-        </div>
+      {/* Nombre y rol general */}
+      <h2 className="profile-nombre">{perfil.nombre}</h2>
+      <p className="profile-rol">{rol.includes('sensei') ? 'SENSEI' : 'ESTUDIANTE'}</p>
 
-        <button className="btn-amigo">Añadir amigo</button>
+      {/* Dojo y organización */}
+      {orgNombre && <p className="info-secundaria">{orgNombre}</p>}
+      {dojoNombre && <p className="info-secundaria">Dojo: {dojoNombre}</p>}
 
-        <div className="insignias-destacadas">
-          <img src="/icons/insignia1.png" alt="insignia" />
-          <img src="/icons/insignia2.png" alt="insignia" />
-          <img src="/icons/insignia3.png" alt="insignia" />
-        </div>
-
-        <div className="estado-input">
-          <input type="text" placeholder="¿Qué estás pensando?" disabled />
-        </div>
+      {/* Estadísticas */}
+      <div className="profile-stats">
+        <div><strong>{amigos}</strong><br />amigos</div>
+        <div><strong>{perfil.grado || 'Sin grado'}</strong><br />grado</div>
+        <div><strong>{perfil.insignias?.length || 0}</strong><br />insignias</div>
       </div>
 
+      {/* Botón añadir amigo */}
+      <button className="btn-amigo">Añadir amigo</button>
+
+      {/* Insignias */}
+      <div className="insignias-row">
+        {(perfil.insignias || []).map((badge, i) => (
+          <img key={i} src={`/icons/${badge}`} alt={`Insignia ${i}`} className="insignia-img" />
+        ))}
+      </div>
+
+      {/* Publicar estado */}
+      <div className="estado-input">
+        <input type="text" placeholder="¿Qué estás pensando?" disabled />
+      </div>
+
+      {/* Publicación ficticia */}
       <div className="post">
         <div className="post-header">
           <img
@@ -119,6 +171,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
+      {/* Navegación inferior */}
       <div className="bottom-nav">
         <Link to="/profile">🏠</Link>
         <Link to="/publicaciones">🧾</Link>
