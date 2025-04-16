@@ -53,4 +53,89 @@
 .add-friend-button {
   background-color: #2962ff;
   color: white;
-  border: none
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.add-friend-button:hover {
+  background-color: #0039cb;
+}
+
+.profile-insignias {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-insignias img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid #eee;
+  background-color: white;
+  object-fit: contain;
+}
+
+.status-input {
+  background-color: #f3f7f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+.post-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.post-author img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.post-content {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+/* Responsive layout */
+@media (min-width: 700px) {
+  .profile-container {
+    padding-top: 2rem;
+  }
+
+  .profile-insignias img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .add-friend-button {
+    font-size: 1.1rem;
+  }
+}
