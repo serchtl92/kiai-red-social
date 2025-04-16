@@ -1,212 +1,56 @@
-body {
-  margin: 0;
-  background-color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
-}
+/* styles/ProfilePage.css */
 
 .profile-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 1.2rem;
-  text-align: center;
-  background-color: #fff;
-}
-
-/* Barra superior con íconos */
-.profile-header-icons {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 1rem 1rem 0 1rem;
-  font-size: 1.4rem;
-}
-
-.profile-header-icons img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-
-/* Imagen de perfil sin recorte */
-.profile-avatar {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  object-fit: contain;
+  text-align: center;
+  padding: 1rem;
+  max-width: 480px;
   margin: 0 auto;
-  margin-bottom: 0.8rem;
-  background-color: #fff;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial', sans-serif;
 }
 
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
 
-.profile-name {
-  font-size: 1.6rem;
+.profile-nombre {
+  font-size: 1.8rem;
   font-weight: bold;
-  margin: 0;
+  margin-bottom: 0.25rem;
   color: #222;
+  text-transform: capitalize;
 }
 
-.profile-role {
-  font-size: 0.9rem;
-  color: #777;
-  margin-bottom: 1.2rem;
+.profile-rol {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 1rem;
 }
 
 .profile-stats {
   display: flex;
-  justify-content: space-between;
-  margin: 0 auto 1.2rem;
-  max-width: 300px;
-  font-size: 0.9rem;
-  color: #222;
-}
-
-.add-friend-btn {
-  background-color: #2265ff;
-  color: white;
-  padding: 0.6rem 1.4rem;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 1.2rem;
-  cursor: pointer;
-}
-
-.insignias {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 1.4rem;
-}
-
-.insignias img {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-}
-
-.publicar-box {
-  background-color: #f2f9f6;
-  border-radius: 10px;
-  padding: 0.7rem;
-  margin-bottom: 1.2rem;
-  font-size: 0.9rem;
-  color: #444;
-}
-
-.post {
-  text-align: left;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  margin: 0 auto;
-  max-width: 360px;
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 0.6rem;
-}
-
-.post-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.post-username {
-  font-weight: bold;
-  font-size: 0.95rem;
-}
-
-.post-time {
-  font-size: 0.75rem;
-  color: #777;
-}
-
-.post-text {
-  font-size: 0.9rem;
-  color: #333;
-  line-height: 1.4;
-}
-
-.footer-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  border-top: 1px solid #ddd;
-  display: flex;
   justify-content: space-around;
-  padding: 0.5rem 0;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
-.footer-nav img {
-  width: 24px;
-  height: 24px;
+.profile-stats div {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
 }
 
-/* Estilo para pantallas grandes (laptops, monitores) */
-@media (min-width: 768px) {
-  .profile-container {
-    max-width: 600px;
-    padding: 2rem;
-    margin: 2rem auto;
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.08);
-  }
-
-  .profile-avatar {
-    width: 150px;
-    height: 150px;
-  }
-
-  .profile-name {
-    font-size: 2rem;
-  }
-
-  .profile-role {
-    font-size: 1.1rem;
-  }
-
-  .profile-stats {
-    font-size: 1.1rem;
-    max-width: 400px;
-    margin-bottom: 1.5rem;
-  }
-
-  .add-friend-btn {
-    font-size: 1.1rem;
-    padding: 0.8rem 2rem;
-  }
-
-  .insignias img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .post {
-    font-size: 1.1rem;
-    max-width: 500px;
-    margin: 1.5rem auto;
-  }
-
-  .post-avatar {
-    width: 44px;
-    height: 44px;
-  }
-
-  .post-text {
-    font-size: 1rem;
-  }
-}
-
+.add-friend-button {
+  background-color: #2962ff;
+  color: white;
+  border: none
