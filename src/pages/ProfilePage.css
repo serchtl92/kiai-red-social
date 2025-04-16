@@ -153,3 +153,60 @@ body {
   width: 24px;
   height: 24px;
 }
+
+/* Estilo para pantallas grandes (laptops, monitores) */
+@media (min-width: 768px) {
+  .profile-container {
+    max-width: 600px;
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .profile-avatar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+  }
+
+  .profile-role {
+    font-size: 1.1rem;
+  }
+
+  .profile-stats {
+    font-size: 1.1rem;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+  }
+
+  .add-friend-btn {
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+  }
+
+  .insignias img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .post {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 1.5rem auto;
+  }
+
+  .post-avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .post-text {
+    font-size: 1rem;
+  }
+}
+
