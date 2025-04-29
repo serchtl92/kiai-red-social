@@ -1,0 +1,98 @@
+.mi-organizacion-tab {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.select-dojo {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.tarjeta-usuario {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.avatar-mini {
+  width: 60px; /* 🔥 Tamaño controlado */
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.info-usuario {
+  flex-grow: 1;
+}
+
+.nombre-usuario {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.dojo-usuario {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.btn-finanzas,
+.btn-dar-baja {
+  padding: 6px 12px;
+  margin-left: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-finanzas {
+  background-color: #22c55e;
+  color: white;
+}
+
+.btn-finanzas:hover {
+  background-color: #16a34a;
+}
+
+.btn-dar-baja {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-dar-baja:hover {
+  background-color: #dc2626;
+}
+
+.sin-datos {
+  color: #888;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.desaparecer {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.3s ease;
+}
+
+.cargando {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin: 20px 0;
+}

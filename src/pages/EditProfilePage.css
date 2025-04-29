@@ -1,0 +1,69 @@
+.edit-profile-page {
+  max-width: 480px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+.edit-profile-page h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.edit-form {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.edit-form label {
+  font-weight: bold;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.foto-preview {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.foto-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sin-foto {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.edit-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.edit-form button:hover {
+  background: #006ae6;
+}
+

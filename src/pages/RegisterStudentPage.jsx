@@ -13,6 +13,7 @@ const RegisterStudentPage = () => {
   const [senseiId, setSenseiId] = useState("");
   const [organizaciones, setOrganizaciones] = useState([]);
   const [senseis, setSenseis] = useState([]);
+  const [dojoId, setDojoId] = useState(null); // NUEVO ESTADO
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
@@ -36,7 +37,7 @@ const RegisterStudentPage = () => {
       if (organizacionId && organizacionId !== "independiente") {
         const { data, error } = await supabase
           .from("senseis")
-          .select("id, nombre")
+          .select("id, nombre, dojo_id") // TRAEMOS TAMBIÉN dojo_id
           .eq("organizacion_id", organizacionId);
 
         if (error) {
@@ -47,11 +48,23 @@ const RegisterStudentPage = () => {
       } else {
         setSenseis([]);
         setSenseiId(null);
+        setDojoId(null);
       }
     };
 
     fetchSenseis();
   }, [organizacionId]);
+
+  const handleSenseiChange = (e) => {
+    const selectedSenseiId = e.target.value;
+    setSenseiId(selectedSenseiId);
+
+    // Buscamos el dojo_id del sensei seleccionado
+    const senseiSeleccionado = senseis.find(s => s.id === selectedSenseiId);
+    if (senseiSeleccionado) {
+      setDojoId(senseiSeleccionado.dojo_id);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +78,6 @@ const RegisterStudentPage = () => {
     }
 
     try {
-      // Crear cuenta en Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
@@ -78,18 +90,17 @@ const RegisterStudentPage = () => {
 
       const userId = authData.user.id;
 
-      // Insertar en la tabla estudiantes
-      const { error: insertError } = await supabase.from("estudiantes").insert([
-        {
-          id: userId,
-          nombre,
-          email,
-          password,
-          status: "pending",
-          organizacion_id: organizacionId === "independiente" ? null : organizacionId,
-          sensei_id: organizacionId === "independiente" ? null : senseiId,
-        },
-      ]);
+      const { error: insertError } = await supabase.from("estudiantes").insert([{
+        id: userId,
+        nombre,
+        email,
+        password,
+        aprobado: false,
+        estado: "pendiente",
+        organizacion_id: organizacionId === "independiente" ? null : organizacionId,
+        sensei_id: organizacionId === "independiente" ? null : senseiId,
+        dojo_id: organizacionId === "independiente" ? null : dojoId, // GUARDAMOS EL dojo_id TAMBIÉN
+      }]);
 
       if (insertError) {
         setError("Error al guardar estudiante: " + insertError.message);
@@ -154,7 +165,7 @@ const RegisterStudentPage = () => {
         {organizacionId !== "independiente" && (
           <select
             value={senseiId}
-            onChange={(e) => setSenseiId(e.target.value)}
+            onChange={handleSenseiChange}
             required
           >
             <option value="">Selecciona un sensei</option>

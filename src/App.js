@@ -13,6 +13,13 @@ import ConfirmadoPage from './pages/ConfirmadoPage';
 import EsperaValidacionPage from "./pages/EsperaValidacionPage"
 import InsigniasPage from './pages/InsigniasPage';
 import PostPage from './pages/PostPage';
+import ProfileUser from './pages/ProfileUser';
+import SolicitudesAmistad from './pages/SolicitudesAmistad';
+import NotificacionesPage from './pages/NotificacionesPage';
+import PublicacionPage from './pages/PublicacionPage';
+import ProfilePhotosPage from './pages/ProfilePhotosPage';
+import EditProfilePage from './pages/EditProfilePage';
+import DashboardSensei from './components/DashboardSensei/DashboardSensei';
 
 function App() {
   return (
@@ -31,6 +38,14 @@ function App() {
         <Route path="/espera-validacion" element={<EsperaValidacionPage />} />
         <Route path="/insignias" element={<InsigniasPage />} />
         <Route path="/publicaciones" element={<PostPage />} />
+        <Route path="/usuario/:id" element={<ProfileUser />} />
+        <Route path="/perfil/:id" element={<ProfileUser />} /> {/* para que funcione navigate(`/perfil/${id}`) */}
+        <Route path="/solicitudes" element={<SolicitudesAmistad />} />
+        <Route path="/notificaciones" element={<NotificacionesPage />} />
+        <Route path="/publicaciones/:id" element={<PublicacionPage />} />
+        <Route path="/mis-fotos" element={<ProfilePhotosPage />} />
+        <Route path="/editar-perfil" element={<EditProfilePage />} />
+        <Route path="/dashboard-sensei" element={<DashboardSensei />} />
 
       </Routes>
     </Router>
